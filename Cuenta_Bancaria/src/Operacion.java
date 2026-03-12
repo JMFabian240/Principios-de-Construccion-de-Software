@@ -25,6 +25,6 @@ public class Operacion {
 
     @Override
     public String toString() {
-        return "[" + fecha + "] " + tipo + " - $" + String.format("%.2f", monto);
+        return " " + fecha + "  " + tipo + " - $" + String.format("%.2f", monto);
     }
 }

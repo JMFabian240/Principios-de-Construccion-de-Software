@@ -1,4 +1,5 @@
 public enum TipoOperacion {
     DEPOSITO,
-    RETIRO
+    RETIRO,
+    PAGO_DE_SERVICO
 }
