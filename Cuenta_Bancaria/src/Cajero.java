@@ -10,7 +10,7 @@ public class Cajero {
         }
         return false;
     }
-    public boolean validarTarjeta(String numeroTarjeta, String pin){
+    public boolean validarTarjeta( String pin){
         validarSesion();
 
         Tarjeta tarjetaUsuario = usuarioActivo.getCuenta().getTarjeta();
@@ -19,10 +19,9 @@ public class Cajero {
             return false;
         }
 
-        boolean numeroTajertaCorrecto = tarjetaUsuario.getNumeroTarjeta().equals(numeroTarjeta);
         boolean pinCorrecto = tarjetaUsuario.getPin().equals(pin);
 
-        return  numeroTajertaCorrecto && pinCorrecto;
+        return  pinCorrecto;
     }
 
     public void cerrarSesion() {
@@ -47,33 +46,21 @@ public class Cajero {
 
     public boolean retirar(double monto) {
         validarSesion();
-        return usuarioActivo.getCuenta().retirar(monto);
+
+        if ( (monto >= 200 && monto <= usuarioActivo.getCuenta().getSaldo() ) && monto % 100 == 0 ){
+            return usuarioActivo.getCuenta().retirar(monto);
+        }
+        return false;
     }
 
-    public String pagoServicioEfectivo (double pago, double costoServico){
+    public boolean pagarServicio(double pago, double costoServico){
         validarSesion();
+        return usuarioActivo.getCuenta().pagoServicio(pago,costoServico);
+    }
 
-        if ( pago % 100 != 0 ){
-            return "ERROR: EL cajero solo acepta billetes multiplos de 100.\n" +
-                                "Devolviendo su dinero. " +
-                                "\nOperacion Canselada\n";
-        }
-        if ( pago < costoServico ){
-            return "Fondos insucientes.  El costo del servicio es de" + costoServico +
-                                "\nDevolviendo su dinero." +
-                                "\nOperacion Canselada\n";
-        }
-
-        double cambio =  pago - costoServico;
-
-        if (cambio > 0 ){
-            return "Su cambio es de " + cambio;
-        }
-        else if (pago == costoServico){
-            return "Su pago fue exacto" ;
-        }
-        return "¡Su pago fue realizado con exito!" ;
-
+    public double calcularCambio(double pago, double costo){
+        double cambio;
+        return  cambio = pago - costo;
     }
 
     public void mostrarHistorial() {

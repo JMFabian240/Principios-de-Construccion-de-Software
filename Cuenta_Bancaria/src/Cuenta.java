@@ -12,10 +12,11 @@ public class Cuenta {
     private static final SecureRandom random = new SecureRandom();
     private static final Set<String> numerosCuenta = new HashSet<>();
 
-    public Cuenta(double saldoInicial ) {
+    public Cuenta(double saldoInicial, String pin ) {
         this.numeroCuenta = generarNumeroCuentaUnico();
         this.saldo = saldoInicial;
         this.historial = new ArrayList<>();
+        this.tarjeta = new Tarjeta(pin);
     }
 
     public  static String generarNumeroCuentaUnico(){
@@ -48,20 +49,20 @@ public class Cuenta {
     }
 
     public boolean retirar(double monto) {
-        if ( ( monto <= 200 && monto > saldo ) && monto % 100 == 0 ) {
+        if (  monto > 0  && monto <= saldo) {
             saldo -= monto;
+            historial.add(new Operacion(TipoOperacion.RETIRO, monto));
             return true;
         }
-        historial.add(new Operacion(TipoOperacion.RETIRO, monto));
         return false;
     }
 
-    public boolean pagoServicioCuenta( double pago ) {
-        if ( (pago <= 0 && pago > saldo) &&  pago % 100 == 0 ) {
+    public boolean pagoServicio( double pago , double costo) {
+        if ( (pago > 0 && pago <= saldo) && pago >= costo ) {
             saldo -= pago;
+            historial.add(new Operacion(TipoOperacion.PAGO_DE_SERVICO, pago));
             return true;
         }
-        historial.add(new Operacion(TipoOperacion.PAGO_DE_SERVICO, pago));
         return false;
     }
 
@@ -75,7 +76,6 @@ public class Cuenta {
     public Tarjeta getTarjeta() {
         return tarjeta;
     }
-
 
     public String getNumeroCuenta() {
         return numeroCuenta;

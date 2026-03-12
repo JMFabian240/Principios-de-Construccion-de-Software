@@ -25,7 +25,6 @@ public class Tarjeta {
             }
 
             numeroGenerado = generadoor.toString();
-
             numRepetido = numerosCuenta.contains(numeroGenerado);
         }
         while (numRepetido);
