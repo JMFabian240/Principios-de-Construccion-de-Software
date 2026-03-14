@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Agenda {
+
     private String titular;
     private List<Contacto> contactosEmergencia;
     private List<Contacto> contactos;
@@ -12,40 +13,93 @@ public class Agenda {
         this.contactos = new ArrayList<>();
     }
 
-    public boolean agregarContacto(Contacto nuevoContacto) {
-        if (nuevoContacto != null && !contactos.contains(nuevoContacto)) {
-            return contactos.add(nuevoContacto);
+    public String getTitular() {
+        return titular;
+    }
+
+    public void setTitular(String titular) {
+        this.titular = titular;
+    }
+
+    public List<Contacto> getContactosEmergencia() {
+        return contactosEmergencia;
+    }
+
+    public void setContactosEmergencia(List<Contacto> contactosEmergencia) {
+        this.contactosEmergencia = contactosEmergencia;
+    }
+
+    public List<Contacto> getContactos() {
+        return contactos;
+    }
+
+    public void setContactos(List<Contacto> contactos) {
+        this.contactos = contactos;
+    }
+
+    private Contacto crearContacto(String nombre, String apellido) {
+        Contacto nuevoContacto = new Contacto(nombre);
+        nuevoContacto.setApellidoPaterno(apellido);
+        return nuevoContacto;
+    }
+
+    public Contacto agregarContacto(String nombre, String apellido) {
+        Contacto nuevoContacto = crearContacto(nombre, apellido);
+        this.contactos.add(nuevoContacto);
+        return nuevoContacto;
+    }
+
+    public void agregarContactoEmergencia(Contacto contacto) {
+        if (!contactosEmergencia.contains(contacto)) {
+            contactosEmergencia.add(contacto);
         }
-        return false;
     }
 
     public List<Contacto> buscarContacto(String nombre) {
         List<Contacto> resultados = new ArrayList<>();
-        for (Contacto c : contactos) {
-            if (c.getNombre().toLowerCase().contains(nombre.toLowerCase())) {
-                resultados.add(c);
+
+        for (Contacto contacto : contactos) {
+            if ( contacto.getNombre() != null && 
+                contacto.getNombre().toLowerCase().contains( nombre.toLowerCase() ) ) {
+                resultados.add(contacto);
             }
         }
         return resultados;
     }
 
-    public boolean eliminarContacto(Contacto contactoAEliminar) {
-        return contactos.remove(contactoAEliminar);
+    public Contacto buscarContactoPorId(int id) {
+        for ( Contacto contacto : contactos ) {
+            if (contacto.getIdContacto() == id) {
+                return contacto;
+            }
+        }
+        return null;
     }
 
-    public boolean editarContacto(Contacto contactoAntiguo, Contacto contactoActualizado) {
-        int indice = contactos.indexOf(contactoAntiguo);
-        if (indice != -1) {
-            contactos.set(indice, contactoActualizado);
-            return true;
+    public boolean eliminarContacto(int idContacto) {
+        Contacto contactoAEliminar = buscarContactoPorId(idContacto);
+        if (contactoAEliminar != null) {
+            contactosEmergencia.remove(contactoAEliminar);
+            return contactos.remove(contactoAEliminar);
         }
         return false;
     }
 
-    public String getTitular() { return titular; }
+    public boolean editarContacto(int idContacto, Contacto contactoActualizado) {
+        for (int i = 0; i < contactos.size(); i++) {
+            if (contactos.get(i).getIdContacto() == idContacto) {
+                contactoActualizado.setIdContacto(idContacto);
+                contactos.set(i, contactoActualizado);
+                return true;
+            }
+        }
+        return false;
+    }
 
     @Override
     public String toString() {
-        return "AGENDA DE: " + titular + "\nTotal de contactos: " + contactos.size() + "\n" + contactos;
+        return  "AGENDA DE: " + titular 
+                + "\nTotal de contactos: " + contactos.size() + "\n" 
+                + contactos;
     }
 }

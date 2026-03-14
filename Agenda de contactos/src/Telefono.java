@@ -4,6 +4,7 @@ public class Telefono {
 
     public Telefono(String numero) {
         this.numero = numero;
+        this.tipoTelefono = TipoTelefono.MOVIL;
     }
 
     public Telefono(String numero, TipoTelefono tipoTelefono) {
@@ -11,13 +12,31 @@ public class Telefono {
         this.tipoTelefono = tipoTelefono;
     }
 
-    public String getNumero() { return numero; }
-    public void setNumero(String numero) { this.numero = numero; }
-    public TipoTelefono getTipoTelefono() { return tipoTelefono; }
-    public void setTipoTelefono(TipoTelefono tipoTelefono) { this.tipoTelefono = tipoTelefono; }
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public TipoTelefono getTipoTelefono() {
+        return tipoTelefono;
+    }
+
+    public void setTipoTelefono(TipoTelefono tipoTelefono) {
+        this.tipoTelefono = tipoTelefono;
+    }
 
     @Override
     public String toString() {
-        return numero + (tipoTelefono != null ? " (" + tipoTelefono + ")" : "");
+        StringBuilder sb = new StringBuilder();
+        if (numero != null && !numero.trim().isEmpty()) {
+            sb.append(numero);
+            if (tipoTelefono != null) {
+                sb.append(" (").append(tipoTelefono).append(")");
+            }
+        }
+        return sb.toString();
     }
 }

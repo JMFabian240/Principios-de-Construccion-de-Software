@@ -9,13 +9,28 @@ public class FechaImportante {
         this.evento = evento;
     }
 
-    public LocalDate getFecha() { return fecha; }
-    public void setFecha(LocalDate fecha) { this.fecha = fecha; }
-    public String getEvento() { return evento; }
-    public void setEvento(String evento) { this.evento = evento; }
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getEvento() {
+        return evento;
+    }
+
+    public void setEvento(String evento) {
+        this.evento = evento;
+    }
 
     @Override
     public String toString() {
-        return evento + ": " + fecha.toString();
+        StringBuilder sb = new StringBuilder();
+        if (fecha != null && evento != null && !evento.trim().isEmpty()) {
+            sb.append(evento).append(": ").append(fecha.toString());
+        }
+        return sb.toString();
     }
 }

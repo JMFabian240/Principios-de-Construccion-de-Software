@@ -1,3 +1,5 @@
 public enum TipoCorreo {
-    INSTITUCIONAL, TRABAJO, PERSONAL
+    INSTITUCIONAL, 
+    TRABAJO, 
+    PERSONAL
 }

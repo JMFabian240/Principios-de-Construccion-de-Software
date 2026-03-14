@@ -2,97 +2,112 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class App {
+    public static void main(String[] args) {
+        Agenda agenda = new Agenda("Harry Jose Manuel Fabian Hernandez");
 
-    // Se utiliza varargs (String... args) para evitar los caracteres no permitidos
-    public static void main(String... args) {
-        System.out.println("=== INICIANDO PRUEBAS DE AGENDA CON DATOS REALES ===");
+        Contacto c1 = agenda.agregarContacto("Alejandro", "Gomez");
+        c1.setSegundoNombre("Daniel");
+        c1.setApellidoMaterno("Silva");
+        c1.setAlias("Alex");
+        c1.agregarTelefono(new Telefono("5512345678", TipoTelefono.MOVIL));
+        c1.agregarTelefono(new Telefono("5587654321", TipoTelefono.CASA));
+        c1.agregarCorreo(new Correo("alex.gomez@email.com", TipoCorreo.PERSONAL));
+        c1.agregarCorreo(new Correo("agomez@empresa.com.mx", TipoCorreo.TRABAJO));
+        c1.agregarDireccion(new Direccion("Insurgentes Sur", "Del Valle", "CDMX", "CDMX", "Mexico", "03100"));
+        c1.agregarFechaImportante(new FechaImportante(LocalDate.of(1995, 8, 20), "Cumpleanos"));
+        agenda.agregarContactoEmergencia(c1);
 
-        Agenda miAgenda = new Agenda("Harry Hernandez");
+        Contacto c2 = agenda.agregarContacto("Maria", "");
+        c2.agregarTelefono(new Telefono("3311223344", TipoTelefono.MOVIL));
 
-        // Contacto 1: Local
-        Contacto c1 = new Contacto("Carlos");
-        c1.setSegundoNombre("Arturo");
-        c1.setApellido("Ramos");
-        c1.agregarTelefono(new Telefono("9211234567", TipoTelefono.MOVIL));
-        c1.agregarTelefono(new Telefono("9219876543", TipoTelefono.CASA));
-        c1.agregarTelefono(new Telefono("9215550000", TipoTelefono.TRABAJO));
-        c1.agregarTelefono(new Telefono("9211112222", TipoTelefono.EMERGENCIA));
-        c1.agregarCorreo(new Correo("carlos.ramos@universidad.edu.mx", TipoCorreo.INSTITUCIONAL));
-        c1.agregarCorreo(new Correo("cramos@empresa.com.mx", TipoCorreo.TRABAJO));
-        c1.agregarCorreo(new Correo("carlos.arturo99@gmail.com", TipoCorreo.PERSONAL));
-        c1.agregarDireccion(new Direccion("Malecón Costero 102", "Centro", "Coatzacoalcos", "Veracruz", "México", "96400"));
-        c1.agregarFechaImportante(new FechaImportante(LocalDate.of(1998, 10, 15), "Cumpleaños"));
+        Contacto c3 = agenda.agregarContacto("Roberto", "Martinez");
+        c3.agregarTelefono(new Telefono("8144556677", TipoTelefono.TRABAJO));
+        c3.agregarTelefono(new Telefono("8199887766", TipoTelefono.MOVIL));
+        c3.agregarTelefono(new Telefono("8122334455", TipoTelefono.CASA));
+        c3.agregarDireccion(new Direccion("Constitucion", "Centro", "Monterrey", "Nuevo Leon", "Mexico", "64000"));
+        c3.agregarDireccion(new Direccion("Calzada San Pedro", "Del Valle", "San Pedro", "Nuevo Leon", "Mexico", "66220"));
 
-        // Contacto 2: Nacional
-        Contacto c2 = new Contacto("Maria");
-        c2.setSegundoNombre("Fernanda");
-        c2.setApellido("Lopez");
-        c2.agregarTelefono(new Telefono("5523456789", TipoTelefono.MOVIL));
-        c2.agregarTelefono(new Telefono("5587654321", TipoTelefono.CASA));
-        c2.agregarTelefono(new Telefono("5550001111", TipoTelefono.TRABAJO));
-        c2.agregarTelefono(new Telefono("5559998888", TipoTelefono.EMERGENCIA));
-        c2.agregarCorreo(new Correo("mlopez@ipn.mx", TipoCorreo.INSTITUCIONAL));
-        c2.agregarCorreo(new Correo("maria.lopez@corporativo.com", TipoCorreo.TRABAJO));
-        c2.agregarCorreo(new Correo("mafer.lopez@hotmail.com", TipoCorreo.PERSONAL));
-        c2.agregarDireccion(new Direccion("Paseo de la Reforma 222", "Juárez", "Ciudad de México", "CDMX", "México", "06600"));
-        c2.agregarFechaImportante(new FechaImportante(LocalDate.of(1995, 4, 22), "Aniversario Laboral"));
+        Contacto c4 = agenda.agregarContacto("Sofia", "Lopez");
+        c4.agregarCorreo(new Correo("sofia.lopez@gmail.com", TipoCorreo.PERSONAL));
+        c4.agregarCorreo(new Correo("slopez@universidad.edu.mx", TipoCorreo.INSTITUCIONAL));
 
-        // Contacto 3: Nacional Norte
-        Contacto c3 = new Contacto("Roberto");
-        c3.setApellido("Chen");
-        c3.agregarTelefono(new Telefono("8181234567", TipoTelefono.MOVIL));
-        c3.agregarTelefono(new Telefono("8189876543", TipoTelefono.CASA));
-        c3.agregarTelefono(new Telefono("8185550000", TipoTelefono.TRABAJO));
-        c3.agregarTelefono(new Telefono("8181112222", TipoTelefono.EMERGENCIA));
-        c3.agregarCorreo(new Correo("roberto.chen@uanl.edu.mx", TipoCorreo.INSTITUCIONAL));
-        c3.agregarCorreo(new Correo("rchen@industriasnorte.com", TipoCorreo.TRABAJO));
-        c3.agregarCorreo(new Correo("robert.chen.mx@yahoo.com", TipoCorreo.PERSONAL));
-        c3.agregarDireccion(new Direccion("Av. Constitución 100", "Centro", "Monterrey", "Nuevo León", "México", "64000"));
-        c3.agregarFechaImportante(new FechaImportante(LocalDate.of(2001, 8, 10), "Titulación"));
+        Contacto c5 = agenda.agregarContacto("Carlos", "Ruiz");
+        c5.agregarTelefono(new Telefono("2223334455", TipoTelefono.MOVIL));
+        c5.agregarFechaImportante(new FechaImportante(LocalDate.of(2023, 11, 2), "Aniversario"));
 
-        // Contacto 4: Internacional Sur
-        Contacto c4 = new Contacto("Valentina");
-        c4.setApellido("Suarez");
-        c4.agregarTelefono(new Telefono("3101234567", TipoTelefono.MOVIL));
-        c4.agregarTelefono(new Telefono("6019876543", TipoTelefono.CASA));
-        c4.agregarTelefono(new Telefono("6015550000", TipoTelefono.TRABAJO));
-        c4.agregarTelefono(new Telefono("3201112222", TipoTelefono.EMERGENCIA));
-        c4.agregarCorreo(new Correo("vsuarez@uniandes.edu.co", TipoCorreo.INSTITUCIONAL));
-        c4.agregarCorreo(new Correo("valentina.suarez@bancolombia.com", TipoCorreo.TRABAJO));
-        c4.agregarCorreo(new Correo("valen.suarez90@gmail.com", TipoCorreo.PERSONAL));
-        c4.agregarDireccion(new Direccion("Carrera 7 No. 71-21", "Chapinero", "Bogotá", "Cundinamarca", "Colombia", "110231"));
-        c4.agregarFechaImportante(new FechaImportante(LocalDate.of(1992, 12, 5), "Cumpleaños"));
+        Contacto c6 = agenda.agregarContacto("Fernando", "");
+        c6.setAlias("Fer");
+        c6.agregarTelefono(new Telefono("9981122334", TipoTelefono.EMERGENCIA));
+        agenda.agregarContactoEmergencia(c6);
 
-        // Contacto 5: Internacional Europa
-        Contacto c5 = new Contacto("Alejandro");
-        c5.setSegundoNombre("Miguel");
-        c5.setApellido("Garcia");
-        c5.agregarTelefono(new Telefono("6123456780", TipoTelefono.MOVIL));
-        c5.agregarTelefono(new Telefono("9189876540", TipoTelefono.CASA));
-        c5.agregarTelefono(new Telefono("9155500000", TipoTelefono.TRABAJO));
-        c5.agregarTelefono(new Telefono("6111122220", TipoTelefono.EMERGENCIA));
-        c5.agregarCorreo(new Correo("agarcia@ucm.es", TipoCorreo.INSTITUCIONAL));
-        c5.agregarCorreo(new Correo("alejandro.garcia@telefonica.es", TipoCorreo.TRABAJO));
-        c5.agregarCorreo(new Correo("alex.garcia.madrid@outlook.com", TipoCorreo.PERSONAL));
-        c5.agregarDireccion(new Direccion("Calle Gran Vía 28", "Centro", "Madrid", "Madrid", "España", "28013"));
-        c5.agregarFechaImportante(new FechaImportante(LocalDate.of(1988, 2, 28), "Día de San Valentín"));
+        Contacto c7 = agenda.agregarContacto("Lucia", "Fernandez");
+        c7.setApellidoMaterno("Cruz");
+        c7.agregarTelefono(new Telefono("6645566778", TipoTelefono.MOVIL));
+        c7.agregarDireccion(new Direccion("Revolucion", "Tijuana", "Baja California", "Mexico"));
 
-        // Agregando todos a la agenda
-        miAgenda.agregarContacto(c1);
-        miAgenda.agregarContacto(c2);
-        miAgenda.agregarContacto(c3);
-        miAgenda.agregarContacto(c4);
-        miAgenda.agregarContacto(c5);
+        Contacto c8 = agenda.agregarContacto("Jorge", "Herrera");
+        c8.agregarTelefono(new Telefono("4429988776", TipoTelefono.TRABAJO));
+        c8.agregarCorreo(new Correo("jorge.herrera@negocio.com", TipoCorreo.TRABAJO));
 
-        System.out.println("\n(+) Todos los contactos reales han sido agregados.");
-        System.out.println(miAgenda);
+        Contacto c9 = agenda.agregarContacto("Elena", "");
+        c9.setApellidoMaterno("Vargas");
+        c9.agregarTelefono(new Telefono("9994455667", TipoTelefono.CASA));
 
-        // Prueba de búsqueda
-        System.out.println("\n(*) Buscando contacto con el nombre 'Alejandro':");
-        List<Contacto> resultados = miAgenda.buscarContacto("Alejandro");
+        Contacto c10 = agenda.agregarContacto("Proteccion Civil", "");
+        c10.agregarTelefono(new Telefono("5556832222", TipoTelefono.EMERGENCIA));
+        agenda.agregarContactoEmergencia(c10);
 
-        for (Contacto encontrado : resultados) {
-            System.out.println(encontrado);
+        System.out.println("IMPRIMIENDO TODOS LOS CONTACTOS");
+        for (Contacto c : agenda.getContactos()) {
+            System.out.print(c.toString());
+        }
+
+        System.out.println("\nCONSULTANDO CONTACTO ESPECIFICO");
+        List<Contacto> busquedaConsultar = agenda.buscarContacto("Maria");
+        if (!busquedaConsultar.isEmpty()) {
+            int idTemporalConsultar = busquedaConsultar.get(0).getIdContacto();
+            Contacto contactoConsultado = agenda.buscarContactoPorId(idTemporalConsultar);
+            System.out.print(contactoConsultado.toString());
+        }
+
+        System.out.println("\nEDITANDO CONTACTO");
+        List<Contacto> busquedaEditar = agenda.buscarContacto("Carlos");
+        if (!busquedaEditar.isEmpty()) {
+            int idTemporalEditar = busquedaEditar.get(0).getIdContacto();
+
+            Contacto carlosModificado = new Contacto("Carlos");
+            carlosModificado.setApellidoPaterno("Ruiz");
+            carlosModificado.setApellidoMaterno("Guzman");
+            carlosModificado.agregarTelefono(new Telefono("2223334455", TipoTelefono.MOVIL));
+            carlosModificado.agregarTelefono(new Telefono("2229998877", TipoTelefono.TRABAJO));
+            carlosModificado.agregarCorreo(new Correo("carlos.ruiz@nuevo.com", TipoCorreo.PERSONAL));
+
+            agenda.editarContacto(idTemporalEditar, carlosModificado);
+
+            Contacto contactoEditado = agenda.buscarContactoPorId(idTemporalEditar);
+            System.out.print(contactoEditado.toString());
+        }
+
+        System.out.println("\nELIMINANDO CONTACTO");
+        List<Contacto> busquedaEliminar = agenda.buscarContacto("Roberto");
+        if (!busquedaEliminar.isEmpty()) {
+            int idTemporalEliminar = busquedaEliminar.get(0).getIdContacto();
+            agenda.eliminarContacto(idTemporalEliminar);
+
+            Contacto comprobacion = agenda.buscarContactoPorId(idTemporalEliminar);
+            if (comprobacion == null) {
+                System.out.println("El contacto Roberto fue eliminado exitosamente de la memoria y la agenda.");
+            }
+        }
+
+        System.out.println("\nIMPRIMIENDO LISTA DESPUES DE ELIMINACION");
+        for (Contacto c : agenda.getContactos()) {
+            System.out.println("- " + c.getNombre() + (c.getApellidoPaterno() != null ? " " + c.getApellidoPaterno() : ""));
+        }
+
+        System.out.println("\nIMPRIMIENDO LISTA DE CONTACTOS DE EMERGENCIA");
+        for (Contacto c : agenda.getContactosEmergencia()) {
+            System.out.print(c.toString());
         }
     }
 }

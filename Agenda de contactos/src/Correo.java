@@ -4,6 +4,7 @@ public class Correo {
 
     public Correo(String direccion) {
         this.direccion = direccion;
+        this.tipoCorreo = TipoCorreo.PERSONAL;
     }
 
     public Correo(String direccion, TipoCorreo tipoCorreo) {
@@ -11,13 +12,31 @@ public class Correo {
         this.tipoCorreo = tipoCorreo;
     }
 
-    public String getDireccion() { return direccion; }
-    public void setDireccion(String direccion) { this.direccion = direccion; }
-    public TipoCorreo getTipoCorreo() { return tipoCorreo; }
-    public void setTipoCorreo(TipoCorreo tipoCorreo) { this.tipoCorreo = tipoCorreo; }
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public TipoCorreo getTipoCorreo() {
+        return tipoCorreo;
+    }
+
+    public void setTipoCorreo(TipoCorreo tipoCorreo) {
+        this.tipoCorreo = tipoCorreo;
+    }
 
     @Override
     public String toString() {
-        return direccion + (tipoCorreo != null ? " " + tipoCorreo + " " : "");
+        StringBuilder sb = new StringBuilder();
+        if (direccion != null && !direccion.trim().isEmpty()) {
+            sb.append(direccion);
+            if (tipoCorreo != null) {
+                sb.append(" (").append(tipoCorreo).append(")");
+            }
+        }
+        return sb.toString();
     }
 }
